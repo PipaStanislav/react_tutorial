@@ -1,33 +1,40 @@
 import React from 'react';
 import './Board.css';
 import Square from './Square/Square';
+import arraySplitter from '../../libs/array-splitter';
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.NumberSquaresInRow = 3;
+  }
+
   renderSquare(i) {
     return <Square
+      key={i.toString()}
       value={this.props.squares[i]}
       onClick={() => this.props.onClick(i)}
     />;
   }
 
+  renderBoardRow(row, i) {
+    return (
+      <div key={i.toString()} className="board-row">
+        {row.map(square => this.renderSquare(square))}
+      </div>
+    )
+  }
+
+  renderBoardRows(squares) {
+    return arraySplitter(squares, this.NumberSquaresInRow).map((row, index) => {
+      return this.renderBoardRow(row, index);
+    });
+  }
+
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {this.renderBoardRows(this.props.squares)}
       </div>
     );
   }

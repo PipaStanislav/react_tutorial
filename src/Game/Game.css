@@ -6,3 +6,12 @@
 .game-info {
     margin-left: 20px;
 }
+
+.game-info li {
+    margin-bottom: 5px;
+}
+
+.game-info li button {
+    background-color: #fff;
+    border: 1px solid #999;
+}
