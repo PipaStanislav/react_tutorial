@@ -1,0 +1,21 @@
+.game-info {
+    margin-left: 20px;
+}
+
+.game-info li {
+    margin-bottom: 5px;
+}
+
+.game-info li button {
+    background-color: #fff;
+    border: 1px solid #999;
+}
+
+.game-info li button:focus {
+    background-color: gray;
+}
+
+h4 {
+    display: inline-block;
+    margin-right: 10px;
+}

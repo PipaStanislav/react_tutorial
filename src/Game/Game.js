@@ -1,6 +1,7 @@
 import React from 'react';
 import './Game.css';
 import Board from './Board/Board';
+import GameInfo from './Game-info/Game-info';
 import calculateWinner from './libs/calculate-winner';
 
 class Game extends React.Component {
@@ -16,7 +17,7 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);;
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = [...current.squares];
 
@@ -45,16 +46,6 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((step, move) => {
-      const desc = move ? 'Перейти к ходу #' + move : 'К началу игры';
-
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
-      )
-    });
-
     let status;
 
     if (winner) {
@@ -72,8 +63,11 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+          <GameInfo
+            status={status}
+            history={this.state.history}
+            onClick={(move) => this.jumpTo(move)}
+          />
         </div>
       </div>
     );
