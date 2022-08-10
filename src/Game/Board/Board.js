@@ -10,7 +10,14 @@ class Board extends React.Component {
   }
 
   renderSquare(i) {
+    let isVictoryStep = false;
+
+    if (this.props.victoriousSteps && this.props.victoriousSteps.includes(i)) {
+      isVictoryStep = true;
+    }
+
     return <Square
+      isVictoryStep={isVictoryStep}
       key={i.toString()}
       value={this.props.squares[i]}
       onClick={() => this.props.onClick(i)}
